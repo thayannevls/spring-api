@@ -34,6 +34,13 @@ public class AlunoController {
 		return new ResponseEntity<List<AlunoDTO>>(response, HttpStatus.OK);
 	}
 	
+	@GetMapping("/aluno/disciplina/{id}")
+	public ResponseEntity<List<Aluno>> getByDisciplina(@PathVariable int id) {
+		List<Aluno> alunos = this.alunoDAO.findByDisciplinasId(id);
+		
+		return new ResponseEntity<List<Aluno>>(alunos, HttpStatus.OK);
+	}
+	
 	@PostMapping("/aluno")
 	public ResponseEntity<AlunoDTO> create(@RequestBody Aluno aluno) {
 		return new ResponseEntity<AlunoDTO>(AlunoDTO.objToDTO(this.alunoDAO.save(aluno)), HttpStatus.CREATED);
